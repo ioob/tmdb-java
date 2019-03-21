@@ -2,7 +2,7 @@ package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.ChangeResultsPage;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -17,7 +17,7 @@ public interface ChangesService {
      * @param end_date   <em>Optional.</em> Filter results with an end date.
      */
     @GET("movie/changes")
-    Call<ChangeResultsPage> movie(
+    Single<ChangeResultsPage> movie(
             @Query("start_date") TmdbDate start_date,
             @Query("end_date") TmdbDate end_date
     );
@@ -32,7 +32,7 @@ public interface ChangesService {
      * @param end_date   <em>Optional.</em> Filter results with an end date.
      */
     @GET("person/changes")
-    Call<ChangeResultsPage> person(
+    Single<ChangeResultsPage> person(
             @Query("start_date") TmdbDate start_date,
             @Query("end_date") TmdbDate end_date
     );
@@ -47,7 +47,7 @@ public interface ChangesService {
      * @param end_date   <em>Optional.</em> Filter results with an end date.
      */
     @GET("tv/changes")
-    Call<ChangeResultsPage> tv(
+    Single<ChangeResultsPage> tv(
             @Query("start_date") TmdbDate start_date,
             @Query("end_date") TmdbDate end_date
     );

@@ -5,7 +5,8 @@ import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
 import com.uwetrottmann.tmdb2.services.DiscoverService;
-import retrofit2.Call;
+
+import io.reactivex.Single;
 
 public class DiscoverMovieBuilder {
 
@@ -202,7 +203,7 @@ public class DiscoverMovieBuilder {
         return this;
     }
 
-    public Call<MovieResultsPage> build() {
+    public Single<MovieResultsPage> build() {
         return discoverService.discoverMovie(
                 language,
                 region,

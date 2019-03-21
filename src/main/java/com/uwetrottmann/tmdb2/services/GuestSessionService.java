@@ -4,7 +4,7 @@ import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvEpisodeResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -18,7 +18,7 @@ public interface GuestSessionService {
      * @param sortBy   <em>Optional.</em> Sort the results. Allowed Values: created_at.asc, created_at.desc
      */
     @GET("guest_session/{id}/rated/movies")
-    Call<MovieResultsPage> ratedMovies(
+    Single<MovieResultsPage> ratedMovies(
             @Path("id") String session_id,
             @Query("language") String language,
             @Query("sort_by") SortBy sortBy
@@ -32,7 +32,7 @@ public interface GuestSessionService {
      * @param sortBy   <em>Optional.</em> Sort the results. Allowed Values: created_at.asc, created_at.desc
      */
     @GET("guest_session/{id}/rated/tv")
-    Call<TvShowResultsPage> ratedTvShows(
+    Single<TvShowResultsPage> ratedTvShows(
             @Path("id") String session_id,
             @Query("language") String language,
             @Query("sort_by") SortBy sortBy
@@ -45,7 +45,7 @@ public interface GuestSessionService {
      * @param sortBy   <em>Optional.</em> Sort the results. Allowed Values: created_at.asc, created_at.desc
      */
     @GET("guest_session/{id}/rated/tv/episodes")
-    Call<TvEpisodeResultsPage> ratedTvEpisodes(
+    Single<TvEpisodeResultsPage> ratedTvEpisodes(
             @Path("id") String session_id,
             @Query("language") String language,
             @Query("sort_by") SortBy sortBy

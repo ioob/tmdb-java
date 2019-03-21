@@ -19,7 +19,7 @@ import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -39,7 +39,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}")
-    Call<Movie> summary(
+    Single<Movie> summary(
             @Path("movie_id") int movieId,
             @Query("language") String language
     );
@@ -50,7 +50,7 @@ public interface MoviesService {
      * @param movieId A Movie TMDb id.
      */
     @GET("movie/{movie_id}")
-    Call<Movie> summary(
+    Single<Movie> summary(
             @Path("movie_id") int movieId
     );
 
@@ -62,7 +62,7 @@ public interface MoviesService {
      * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Values:</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
      */
     @GET("movie/{movie_id}")
-    Call<Movie> summary(
+    Single<Movie> summary(
             @Path("movie_id") int movieId,
             @Query("language") String language,
             @Query("append_to_response") AppendToResponse appendToResponse
@@ -75,7 +75,7 @@ public interface MoviesService {
      * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Values:</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
      */
     @GET("movie/{movie_id}")
-    Call<Movie> summary(
+    Single<Movie> summary(
             @Path("movie_id") int movieId,
             @Query("append_to_response") AppendToResponse appendToResponse
     );
@@ -89,7 +89,7 @@ public interface MoviesService {
      * @param options          <em>Optional.</em> parameters for the appended extra results.
      */
     @GET("movie/{movie_id}")
-    Call<Movie> summary(
+    Single<Movie> summary(
             @Path("movie_id") int movieId,
             @Query("language") String language,
             @Query("append_to_response") AppendToResponse appendToResponse,
@@ -104,7 +104,7 @@ public interface MoviesService {
      * @param options          <em>Optional.</em> parameters for the appended extra results.
      */
     @GET("movie/{movie_id}")
-    Call<Movie> summary(
+    Single<Movie> summary(
             @Path("movie_id") int movieId,
             @Query("append_to_response") AppendToResponse appendToResponse,
             @QueryMap Map<String, String> options
@@ -122,7 +122,7 @@ public interface MoviesService {
      * @param movieId A Movie TMDb id.
      */
     @GET("movie/{movie_id}/account_states")
-    Call<AccountStates> accountStates(
+    Single<AccountStates> accountStates(
             @Path("movie_id") int movieId
     );
 
@@ -133,7 +133,7 @@ public interface MoviesService {
      * @param country <em>Optional.</em> ISO 3166-1 code.
      */
     @GET("movie/{movie_id}/alternative_titles")
-    Call<AlternativeTitles> alternativeTitles(
+    Single<AlternativeTitles> alternativeTitles(
             @Path("movie_id") int movieId,
             @Query("country") String country
     );
@@ -149,7 +149,7 @@ public interface MoviesService {
      * @param page       <em>Optional.</em> Minimum value is 1, expected value is an integer.
      */
     @GET("movie/{movie_id}/changes")
-    Call<Changes> changes(
+    Single<Changes> changes(
             @Path("movie_id") int movieId,
             @Query("start_date") TmdbDate start_date,
             @Query("end_date") TmdbDate end_date,
@@ -162,7 +162,7 @@ public interface MoviesService {
      * @param movieId A Movie TMDb id.
      */
     @GET("movie/{movie_id}/credits")
-    Call<Credits> credits(
+    Single<Credits> credits(
             @Path("movie_id") int movieId
     );
 
@@ -173,7 +173,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}/images")
-    Call<Images> images(
+    Single<Images> images(
             @Path("movie_id") int movieId,
             @Query("language") String language
     );
@@ -184,7 +184,7 @@ public interface MoviesService {
      * @param movieId A Movie TMDb id.
      */
     @GET("movie/{movie_id}/keywords")
-    Call<Keywords> keywords(
+    Single<Keywords> keywords(
             @Path("movie_id") int movieId
     );
 
@@ -196,7 +196,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}/lists")
-    Call<ListResultsPage> lists(
+    Single<ListResultsPage> lists(
             @Path("movie_id") int movieId,
             @Query("page") Integer page,
             @Query("language") String language
@@ -210,7 +210,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}/similar")
-    Call<MovieResultsPage> similar(
+    Single<MovieResultsPage> similar(
             @Path("movie_id") int movieId,
             @Query("page") Integer page,
             @Query("language") String language
@@ -224,7 +224,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}/recommendations")
-    Call<MovieResultsPage> recommendations(
+    Single<MovieResultsPage> recommendations(
             @Path("movie_id") int movieId,
             @Query("page") Integer page,
             @Query("language") String language
@@ -241,7 +241,7 @@ public interface MoviesService {
      * @param movieId A Movie TMDb id.
      */
     @GET("movie/{movie_id}/release_dates")
-    Call<ReleaseDatesResults> releaseDates(
+    Single<ReleaseDatesResults> releaseDates(
             @Path("movie_id") int movieId
     );
 
@@ -253,7 +253,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}/reviews")
-    Call<ReviewResultsPage> reviews(
+    Single<ReviewResultsPage> reviews(
             @Path("movie_id") int movieId,
             @Query("page") Integer page,
             @Query("language") String language
@@ -265,7 +265,7 @@ public interface MoviesService {
      * @param movieId A Movie TMDb id.
      */
     @GET("movie/{movie_id}/translations")
-    Call<Translations> translations(
+    Single<Translations> translations(
             @Path("movie_id") int movieId
     );
 
@@ -276,7 +276,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}/videos")
-    Call<Videos> videos(
+    Single<Videos> videos(
             @Path("movie_id") int movieId,
             @Query("language") String language
     );
@@ -285,7 +285,7 @@ public interface MoviesService {
      * Get the latest movie id.
      */
     @GET("movie/latest")
-    Call<Movie> latest();
+    Single<Movie> latest();
 
     /**
      * Get the list of movies playing in theaters. This list refreshes every day. The maximum number of items this list
@@ -295,7 +295,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/now_playing")
-    Call<MovieResultsPage> nowPlaying(
+    Single<MovieResultsPage> nowPlaying(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -307,7 +307,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/popular")
-    Call<MovieResultsPage> popular(
+    Single<MovieResultsPage> popular(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -320,7 +320,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/top_rated")
-    Call<MovieResultsPage> topRated(
+    Single<MovieResultsPage> topRated(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -333,7 +333,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/upcoming")
-    Call<MovieResultsPage> upcoming(
+    Single<MovieResultsPage> upcoming(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -348,7 +348,7 @@ public interface MoviesService {
      * @param body               <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
      */
     @POST("movie/{movie_id}/rating")
-    Call<Status> addRating(
+    Single<Status> addRating(
             @Path("movie_id") Integer movieId,
             @Query("authentication") AuthenticationType authenticationType,
             @Body RatingObject body
@@ -363,7 +363,7 @@ public interface MoviesService {
      * @param body    <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
      */
     @POST("movie/{movie_id}/rating")
-    Call<Status> addRating(
+    Single<Status> addRating(
             @Path("movie_id") Integer movieId,
             @Body RatingObject body
     );
@@ -377,7 +377,7 @@ public interface MoviesService {
      * @param authenticationType Authentication Type for this operation. Available Choices: Account, Guest.
      */
     @DELETE("movie/{movie_id}/rating")
-    Call<Status> deleteRating(
+    Single<Status> deleteRating(
             @Path("movie_id") Integer movieId,
             @Query("authentication") AuthenticationType authenticationType
     );
@@ -390,7 +390,7 @@ public interface MoviesService {
      * @param movieId A Movie TMDb id.
      */
     @DELETE("movie/{movie_id}/rating")
-    Call<Status> deleteRating(
+    Single<Status> deleteRating(
             @Path("movie_id") Integer movieId
     );
 

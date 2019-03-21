@@ -7,7 +7,7 @@ import com.uwetrottmann.tmdb2.entities.MediaResultsPage;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -20,7 +20,7 @@ public interface SearchService {
      * @param page  <em>Optional.</em> Minimum value is 1, expected value is an integer.
      */
     @GET("search/company")
-    Call<CompanyResultsPage> company(
+    Single<CompanyResultsPage> company(
             @Query("query") String query,
             @Query("page") Integer page
     );
@@ -33,7 +33,7 @@ public interface SearchService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("search/collection")
-    Call<CollectionResultsPage> collection(
+    Single<CollectionResultsPage> collection(
             @Query("query") String query,
             @Query("page") Integer page,
             @Query("language") String language
@@ -46,7 +46,7 @@ public interface SearchService {
      * @param page  <em>Optional.</em> Minimum value is 1, expected value is an integer.
      */
     @GET("search/keyword")
-    Call<KeywordResultsPage> keyword(
+    Single<KeywordResultsPage> keyword(
             @Query("query") String query,
             @Query("page") Integer page
     );
@@ -66,7 +66,7 @@ public interface SearchService {
      *                           those wanting more of an "autocomplete" type search, set this option to 'ngram'.
      */
     @GET("search/movie")
-    Call<MovieResultsPage> movie(
+    Single<MovieResultsPage> movie(
             @Query("query") String query,
             @Query("page") Integer page,
             @Query("language") String language,
@@ -86,7 +86,7 @@ public interface SearchService {
      * @param region       <em>Optional.</em> ISO 3166-1 code.
      */
     @GET("search/multi")
-    Call<MediaResultsPage> multi(
+    Single<MediaResultsPage> multi(
             @Query("query") String query,
             @Query("page") Integer page,
             @Query("language") String language,
@@ -105,7 +105,7 @@ public interface SearchService {
      *                     those wanting more of an "autocomplete" type search, set this option to 'ngram'.
      */
     @GET("search/person")
-    Call<PersonResultsPage> person(
+    Single<PersonResultsPage> person(
             @Query("query") String query,
             @Query("page") Integer page,
             @Query("include_adult") Boolean includeAdult,
@@ -124,7 +124,7 @@ public interface SearchService {
      *                         an "autocomplete" type search, set this option to 'ngram'.
      */
     @GET("search/tv")
-    Call<TvShowResultsPage> tv(
+    Single<TvShowResultsPage> tv(
             @Query("query") String query,
             @Query("page") Integer page,
             @Query("language") String language,

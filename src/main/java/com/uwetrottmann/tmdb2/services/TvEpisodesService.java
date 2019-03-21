@@ -12,7 +12,7 @@ import com.uwetrottmann.tmdb2.entities.TvEpisode;
 import com.uwetrottmann.tmdb2.entities.TvExternalIds;
 import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -33,7 +33,7 @@ public interface TvEpisodesService {
      * @param tvShowEpisodeNumber TvEpisode Number.
      */
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}")
-    Call<TvEpisode> episode(
+    Single<TvEpisode> episode(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber
@@ -48,7 +48,7 @@ public interface TvEpisodesService {
      * @param language            <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}")
-    Call<TvEpisode> episode(
+    Single<TvEpisode> episode(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber,
@@ -64,7 +64,7 @@ public interface TvEpisodesService {
      * @param appendToResponse    <em>Optional.</em> extra requests to append to the result.
      */
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}")
-    Call<TvEpisode> episode(
+    Single<TvEpisode> episode(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber,
@@ -81,7 +81,7 @@ public interface TvEpisodesService {
      * @param appendToResponse    <em>Optional.</em> extra requests to append to the result.
      */
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}")
-    Call<TvEpisode> episode(
+    Single<TvEpisode> episode(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber,
@@ -99,7 +99,7 @@ public interface TvEpisodesService {
      * @param options             <em>Optional.</em> parameters for the appended extra results.
      */
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}")
-    Call<TvEpisode> episode(
+    Single<TvEpisode> episode(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber,
@@ -118,7 +118,7 @@ public interface TvEpisodesService {
      * @param options             <em>Optional.</em> parameters for the appended extra results.
      */
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}")
-    Call<TvEpisode> episode(
+    Single<TvEpisode> episode(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber,
@@ -138,7 +138,7 @@ public interface TvEpisodesService {
      * @param page            <em>Optional.</em> Minimum value is 1, expected value is an integer.
      */
     @GET("tv/episode/{episode_id}/changes")
-    Call<Changes> changes(
+    Single<Changes> changes(
             @Path("episode_id") int tvShowEpisodeId,
             @Query("start_date") TmdbDate start_date,
             @Query("end_date") TmdbDate end_date,
@@ -153,7 +153,7 @@ public interface TvEpisodesService {
      * @param tvShowEpisodeNumber TvEpisode Number.
      */
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}/credits")
-    Call<Credits> credits(
+    Single<Credits> credits(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber
@@ -167,7 +167,7 @@ public interface TvEpisodesService {
      * @param tvShowEpisodeNumber TvEpisode Number.
      */
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}/external_ids")
-    Call<TvExternalIds> externalIds(
+    Single<TvExternalIds> externalIds(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber
@@ -182,7 +182,7 @@ public interface TvEpisodesService {
      * @param tvShowEpisodeNumber TvEpisode Number.
      */
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}/images")
-    Call<Images> images(
+    Single<Images> images(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber
@@ -197,7 +197,7 @@ public interface TvEpisodesService {
      * @param language            <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}/videos")
-    Call<Videos> videos(
+    Single<Videos> videos(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber,
@@ -216,7 +216,7 @@ public interface TvEpisodesService {
      * @param tvShowEpisodeNumber TvEpisode Number.
      */
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}/account_states")
-    Call<BaseAccountStates> accountStates(
+    Single<BaseAccountStates> accountStates(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber
@@ -233,7 +233,7 @@ public interface TvEpisodesService {
      * @param body                <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
      */
     @POST("tv/{tv_id}/season/{season_number}/episode/{episode_number}/rating")
-    Call<Status> addRating(
+    Single<Status> addRating(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber,
@@ -252,7 +252,7 @@ public interface TvEpisodesService {
      * @param body                <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
      */
     @POST("tv/{tv_id}/season/{season_number}/episode/{episode_number}/rating")
-    Call<Status> addRating(
+    Single<Status> addRating(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber,
@@ -271,7 +271,7 @@ public interface TvEpisodesService {
      * @param authenticationType  Authentication Type for this operation. Available Choices: Account, Guest.
      */
     @DELETE("tv/{tv_id}/season/{season_number}/episode/{episode_number}/rating")
-    Call<Status> deleteRating(
+    Single<Status> deleteRating(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber,
@@ -288,7 +288,7 @@ public interface TvEpisodesService {
      * @param tvShowEpisodeNumber TvEpisode Number.
      */
     @DELETE("tv/{tv_id}/season/{season_number}/episode/{episode_number}/rating")
-    Call<Status> deleteRating(
+    Single<Status> deleteRating(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber

@@ -5,7 +5,7 @@ import com.uwetrottmann.tmdb2.entities.GenreResults;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -18,7 +18,7 @@ public interface GenresService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("genre/movie/list")
-    Call<GenreResults> movie(
+    Single<GenreResults> movie(
             @Query("language") String language
     );
 
@@ -28,7 +28,7 @@ public interface GenresService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("genre/tv/list")
-    Call<GenreResults> tv(
+    Single<GenreResults> tv(
             @Query("language") String language
     );
 
@@ -49,7 +49,7 @@ public interface GenresService {
      * @param sort_by       <em>Optional.</em> Sort the results. Allowed Values: created_at.asc, created_at.desc
      */
     @GET("genre/{genre_id}/movies")
-    Call<MovieResultsPage> movies(
+    Single<MovieResultsPage> movies(
             @Path("genre_id") int genreId,
             @Query("language") String language,
             @Query("include_adult") Boolean include_adult,

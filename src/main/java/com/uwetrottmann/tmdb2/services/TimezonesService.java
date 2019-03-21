@@ -1,7 +1,7 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.Timezones;
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 
 public interface TimezonesService {
@@ -10,5 +10,5 @@ public interface TimezonesService {
      * Get the list of supported timezones on TMDb.
      */
     @GET("timezones/list")
-    Call<Timezones> timezones();
+    Single<Timezones> timezones();
 }

@@ -1,7 +1,7 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.Configuration;
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 
 public interface ConfigurationService {
@@ -17,6 +17,6 @@ public interface ConfigurationService {
      * >http://cf2.imgobject.com/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg</a>
      */
     @GET("configuration")
-    Call<Configuration> configuration();
+    Single<Configuration> configuration();
 
 }

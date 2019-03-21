@@ -2,7 +2,7 @@ package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.FindResults;
 import com.uwetrottmann.tmdb2.enumerations.ExternalSource;
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -19,7 +19,7 @@ public interface FindService {
      * @param language   <em>Optional.</em> ISO 639-1 code.
      */
     @GET("find/{external_id}")
-    Call<FindResults> find(
+    Single<FindResults> find(
             @Path("external_id") String externalId,
             @Query("external_source") ExternalSource source,
             @Query("language") String language
@@ -35,7 +35,7 @@ public interface FindService {
      * @param language   <em>Optional.</em> ISO 639-1 code.
      */
     @GET("find/{external_id}")
-    Call<FindResults> find(
+    Single<FindResults> find(
             @Path("external_id") int externalId,
             @Query("external_source") ExternalSource source,
             @Query("language") String language

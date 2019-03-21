@@ -5,7 +5,8 @@ import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
 import com.uwetrottmann.tmdb2.services.DiscoverService;
-import retrofit2.Call;
+
+import io.reactivex.Single;
 
 public class DiscoverTvBuilder {
 
@@ -130,7 +131,7 @@ public class DiscoverTvBuilder {
         return this;
     }
 
-    public Call<TvShowResultsPage> build() {
+    public Single<TvShowResultsPage> build() {
         return discoverService.discoverTv(
                 language,
                 sort_by,

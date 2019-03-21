@@ -5,7 +5,7 @@ import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -57,7 +57,7 @@ public interface DiscoverService {
      * @see <a href="https://developers.themoviedb.org/3/discover/movie-discover">Movie Discover</a>
      */
     @GET("discover/movie")
-    Call<MovieResultsPage> discoverMovie(
+    Single<MovieResultsPage> discoverMovie(
             @Query("language") String language,
             @Query("region") String region,
             @Query("sort_by") SortBy sort_by,
@@ -118,7 +118,7 @@ public interface DiscoverService {
      * @see <a href="https://developers.themoviedb.org/3/discover/tv-discover">TV Discover</a>
      */
     @GET("discover/tv")
-    Call<TvShowResultsPage> discoverTv(
+    Single<TvShowResultsPage> discoverTv(
             @Query("language") String language,
             @Query("sort_by") SortBy sort_by,
             @Query("air_date.gte") TmdbDate air_date_gte,

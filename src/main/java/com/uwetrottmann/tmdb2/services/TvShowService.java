@@ -17,7 +17,7 @@ import com.uwetrottmann.tmdb2.entities.TvShow;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -36,7 +36,7 @@ public interface TvShowService {
      * @param tvShowId A Tv Show TMDb id.
      */
     @GET("tv/{tv_id}")
-    Call<TvShow> tv(
+    Single<TvShow> tv(
             @Path("tv_id") int tvShowId
     );
 
@@ -47,7 +47,7 @@ public interface TvShowService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/{tv_id}")
-    Call<TvShow> tv(
+    Single<TvShow> tv(
             @Path("tv_id") int tvShowId,
             @Query("language") String language
     );
@@ -60,7 +60,7 @@ public interface TvShowService {
      * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
      */
     @GET("tv/{tv_id}")
-    Call<TvShow> tv(
+    Single<TvShow> tv(
             @Path("tv_id") int tvShowId,
             @Query("language") String language,
             @Query("append_to_response") AppendToResponse appendToResponse
@@ -75,7 +75,7 @@ public interface TvShowService {
      * @param options          <em>Optional.</em> parameters for the appended extra results.
      */
     @GET("tv/{tv_id}")
-    Call<TvShow> tv(
+    Single<TvShow> tv(
             @Path("tv_id") int tvShowId,
             @Query("language") String language,
             @Query("append_to_response") AppendToResponse appendToResponse,
@@ -89,7 +89,7 @@ public interface TvShowService {
      * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
      */
     @GET("tv/{tv_id}")
-    Call<TvShow> tv(
+    Single<TvShow> tv(
             @Path("tv_id") int tvShowId,
             @Query("append_to_response") AppendToResponse appendToResponse
     );
@@ -102,7 +102,7 @@ public interface TvShowService {
      * @param options          <em>Optional.</em> parameters for the appended extra results.
      */
     @GET("tv/{tv_id}")
-    Call<TvShow> tv(
+    Single<TvShow> tv(
             @Path("tv_id") int tvShowId,
             @Query("append_to_response") AppendToResponse appendToResponse,
             @QueryMap Map<String, String> options
@@ -120,7 +120,7 @@ public interface TvShowService {
      * @param tvShowId TMDb id.
      */
     @GET("tv/{tv_id}/account_states")
-    Call<AccountStates> accountStates(
+    Single<AccountStates> accountStates(
             @Path("tv_id") int tvShowId
     );
 
@@ -130,7 +130,7 @@ public interface TvShowService {
      * @param tvShowId A Tv Show TMDb id.
      */
     @GET("tv/{tv_id}/alternative_titles")
-    Call<AlternativeTitles> alternativeTitles(
+    Single<AlternativeTitles> alternativeTitles(
             @Path("tv_id") int tvShowId
     );
 
@@ -150,7 +150,7 @@ public interface TvShowService {
      * @param page       <em>Optional.</em> Minimum value is 1, expected value is an integer.
      */
     @GET("tv/{tv_id}/changes")
-    Call<Changes> changes(
+    Single<Changes> changes(
             @Path("tv_id") int tvShowId,
             @Query("start_date") TmdbDate start_date,
             @Query("end_date") TmdbDate end_date,
@@ -165,7 +165,7 @@ public interface TvShowService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/{tv_id}/credits")
-    Call<Credits> credits(
+    Single<Credits> credits(
             @Path("tv_id") int tvShowId,
             @Query("language") String language
     );
@@ -176,7 +176,7 @@ public interface TvShowService {
      * @param tmbdId A Tv Show TMDb id.
      */
     @GET("tv/{tv_id}/content_ratings")
-    Call<ContentRatings> content_ratings(
+    Single<ContentRatings> content_ratings(
             @Path("tv_id") int tmbdId
     );
 
@@ -187,7 +187,7 @@ public interface TvShowService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/{tv_id}/external_ids")
-    Call<TvExternalIds> externalIds(
+    Single<TvExternalIds> externalIds(
             @Path("tv_id") int tvShowId,
             @Query("language") String language
     );
@@ -199,7 +199,7 @@ public interface TvShowService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/{tv_id}/images")
-    Call<Images> images(
+    Single<Images> images(
             @Path("tv_id") int tvShowId,
             @Query("language") String language
     );
@@ -210,7 +210,7 @@ public interface TvShowService {
      * @param tvShowId A Tv Show TMDb id.
      */
     @GET("tv/{tv_id}/keywords")
-    Call<Keywords> keywords(
+    Single<Keywords> keywords(
             @Path("tv_id") int tvShowId
     );
 
@@ -222,7 +222,7 @@ public interface TvShowService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/{tv_id}/recommendations")
-    Call<TvShowResultsPage> recommendations(
+    Single<TvShowResultsPage> recommendations(
             @Path("tv_id") int tvShowId,
             @Query("page") Integer page,
             @Query("language") String language
@@ -236,7 +236,7 @@ public interface TvShowService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/{tv_id}/similar")
-    Call<TvShowResultsPage> similar(
+    Single<TvShowResultsPage> similar(
             @Path("tv_id") int tvShowId,
             @Query("page") Integer page,
             @Query("language") String language
@@ -249,7 +249,7 @@ public interface TvShowService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/{tv_id}/translations")
-    Call<Translations> translations(
+    Single<Translations> translations(
             @Path("tv_id") int tvShowId,
             @Query("language") String language
     );
@@ -261,7 +261,7 @@ public interface TvShowService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/{tv_id}/videos")
-    Call<Videos> videos(
+    Single<Videos> videos(
             @Path("tv_id") int tvShowId,
             @Query("language") String language
     );
@@ -270,7 +270,7 @@ public interface TvShowService {
      * Get the latest TV show id.
      */
     @GET("tv/latest")
-    Call<TvShow> latest();
+    Single<TvShow> latest();
 
     /**
      * Get the list of TV shows that are currently on the air. This query looks for any TV show that has an episode with
@@ -280,7 +280,7 @@ public interface TvShowService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/on_the_air")
-    Call<TvShowResultsPage> onTheAir(
+    Single<TvShowResultsPage> onTheAir(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -293,7 +293,7 @@ public interface TvShowService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/airing_today")
-    Call<TvShowResultsPage> airingToday(
+    Single<TvShowResultsPage> airingToday(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -306,7 +306,7 @@ public interface TvShowService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/top_rated")
-    Call<TvShowResultsPage> topRated(
+    Single<TvShowResultsPage> topRated(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -318,7 +318,7 @@ public interface TvShowService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/popular")
-    Call<TvShowResultsPage> popular(
+    Single<TvShowResultsPage> popular(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -333,7 +333,7 @@ public interface TvShowService {
      * @param body               <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
      */
     @POST("tv/{tv_id}/rating")
-    Call<Status> addRating(
+    Single<Status> addRating(
             @Path("tv_id") Integer tvShowId,
             @Query("authentication") AuthenticationType authenticationType,
             @Body RatingObject body
@@ -348,7 +348,7 @@ public interface TvShowService {
      * @param body     <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
      */
     @POST("tv/{tv_id}/rating")
-    Call<Status> addRating(
+    Single<Status> addRating(
             @Path("tv_id") Integer tvShowId,
             @Body RatingObject body
     );
@@ -362,7 +362,7 @@ public interface TvShowService {
      * @param authenticationType Authentication Type for this operation. Available Choices: Account, Guest.
      */
     @DELETE("tv/{tv_id}/rating")
-    Call<Status> deleteRating(
+    Single<Status> deleteRating(
             @Path("tv_id") Integer tvShowId,
             @Query("authentication") AuthenticationType authenticationType
     );
@@ -375,7 +375,7 @@ public interface TvShowService {
      * @param tvShowId TMDb id.
      */
     @DELETE("tv/{tv_id}/rating")
-    Call<Status> deleteRating(
+    Single<Status> deleteRating(
             @Path("tv_id") Integer tvShowId
     );
 

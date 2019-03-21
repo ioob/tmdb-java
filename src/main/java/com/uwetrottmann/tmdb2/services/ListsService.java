@@ -6,7 +6,7 @@ import com.uwetrottmann.tmdb2.entities.ListCreateResponse;
 import com.uwetrottmann.tmdb2.entities.ListItemStatus;
 import com.uwetrottmann.tmdb2.entities.ListOperation;
 import com.uwetrottmann.tmdb2.entities.Status;
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -22,7 +22,7 @@ public interface ListsService {
      * @param listId A BaseList TMDb id.(<b>String</b>/Integer).
      */
     @GET("list/{list_id}")
-    Call<List> summary(
+    Single<List> summary(
             @Path("list_id") String listId
     );
 
@@ -32,7 +32,7 @@ public interface ListsService {
      * @param listId A BaseList TMDb id.(String/<b>Integer</b>).
      */
     @GET("list/{list_id}")
-    Call<List> summary(
+    Single<List> summary(
             @Path("list_id") Integer listId
     );
 
@@ -43,7 +43,7 @@ public interface ListsService {
      * @param movieId Movie Id.
      */
     @GET("list/{list_id}/item_status")
-    Call<ListItemStatus> itemStatus(
+    Single<ListItemStatus> itemStatus(
             @Path("list_id") String listId,
             @Query("movie_id") Integer movieId);
 
@@ -54,7 +54,7 @@ public interface ListsService {
      * @param movieId Movie Id.
      */
     @GET("list/{list_id}/item_status")
-    Call<ListItemStatus> itemStatus(
+    Single<ListItemStatus> itemStatus(
             @Path("list_id") Integer listId,
             @Query("movie_id") Integer movieId);
 
@@ -64,7 +64,7 @@ public interface ListsService {
      * <b>Requires an active Session.</b>
      */
     @POST("list")
-    Call<ListCreateResponse> createList(
+    Single<ListCreateResponse> createList(
             @Body ListCreateRequest request
     );
 
@@ -77,7 +77,7 @@ public interface ListsService {
      * @param item   The Body to send. ({@link com.uwetrottmann.tmdb2.entities.ListOperation ListOperation})
      */
     @POST("list/{list_id}/add_item")
-    Call<Status> addMovie(
+    Single<Status> addMovie(
             @Path("list_id") String listId,
             @Body ListOperation item
     );
@@ -91,7 +91,7 @@ public interface ListsService {
      * @param item   The Body to send. ({@link com.uwetrottmann.tmdb2.entities.ListOperation ListOperation})
      */
     @POST("list/{list_id}/add_item")
-    Call<Status> addMovie(
+    Single<Status> addMovie(
             @Path("list_id") Integer listId,
             @Body ListOperation item
     );
@@ -105,7 +105,7 @@ public interface ListsService {
      * @param item   The Body to send. ({@link com.uwetrottmann.tmdb2.entities.ListOperation ListOperation})
      */
     @POST("list/{list_id}/remove_item")
-    Call<Status> removeMovie(
+    Single<Status> removeMovie(
             @Path("list_id") String listId,
             @Body ListOperation item
     );
@@ -119,7 +119,7 @@ public interface ListsService {
      * @param item   The Body to send. ({@link com.uwetrottmann.tmdb2.entities.ListOperation ListOperation})
      */
     @POST("list/{list_id}/remove_item")
-    Call<Status> removeMovie(
+    Single<Status> removeMovie(
             @Path("list_id") Integer listId,
             @Body ListOperation item
     );
@@ -133,7 +133,7 @@ public interface ListsService {
      * @param confirm Confirmation (Boolean).
      */
     @POST("list/{list_id}/clear")
-    Call<Status> clear(
+    Single<Status> clear(
             @Path("list_id") String listId,
             @Query("confirm") Boolean confirm
     );
@@ -147,7 +147,7 @@ public interface ListsService {
      * @param confirm Confirmation (Boolean).
      */
     @POST("list/{list_id}/clear")
-    Call<Status> clear(
+    Single<Status> clear(
             @Path("list_id") Integer listId,
             @Query("confirm") Boolean confirm
     );
@@ -160,7 +160,7 @@ public interface ListsService {
      * @param listId A BaseList TMDb id.(<b>String</b>/Integer).
      */
     @DELETE("list/{list_id}")
-    Call<Status> delete(
+    Single<Status> delete(
             @Path("list_id") String listId
     );
 
@@ -173,7 +173,7 @@ public interface ListsService {
      * @param listId A BaseList TMDb id.(String/<b>Integer</b>).
      */
     @DELETE("list/{list_id}")
-    Call<Status> delete(
+    Single<Status> delete(
             @Path("list_id") Integer listId
     );
 

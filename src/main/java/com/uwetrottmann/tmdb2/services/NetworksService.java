@@ -1,7 +1,7 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.Network;
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -13,7 +13,7 @@ public interface NetworksService {
      * @param id The Network TMDb id.
      */
     @GET("network/{id}")
-    Call<Network> summary(
+    Single<Network> summary(
             @Path("id") Integer id
     );
 

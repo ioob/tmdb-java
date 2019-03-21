@@ -9,7 +9,7 @@ import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.TvSeason;
 import com.uwetrottmann.tmdb2.entities.TvSeasonExternalIds;
 import com.uwetrottmann.tmdb2.entities.Videos;
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -27,7 +27,7 @@ public interface TvSeasonsService {
      * @param language           <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/{tv_id}/season/{season_number}")
-    Call<TvSeason> season(
+    Single<TvSeason> season(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Query("language") String language
@@ -40,7 +40,7 @@ public interface TvSeasonsService {
      * @param tvShowSeasonNumber TvSeason Number.
      */
     @GET("tv/{tv_id}/season/{season_number}")
-    Call<TvSeason> season(
+    Single<TvSeason> season(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber
     );
@@ -54,7 +54,7 @@ public interface TvSeasonsService {
      * @param appendToResponse   <em>Optional.</em> extra requests to append to the result.
      */
     @GET("tv/{tv_id}/season/{season_number}")
-    Call<TvSeason> season(
+    Single<TvSeason> season(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Query("language") String language,
@@ -71,7 +71,7 @@ public interface TvSeasonsService {
      * @param options            <em>Optional.</em> parameters for the appended extra results.
      */
     @GET("tv/{tv_id}/season/{season_number}")
-    Call<TvSeason> season(
+    Single<TvSeason> season(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Query("language") String language,
@@ -87,7 +87,7 @@ public interface TvSeasonsService {
      * @param appendToResponse   <em>Optional.</em> extra requests to append to the result.
      */
     @GET("tv/{tv_id}/season/{season_number}")
-    Call<TvSeason> season(
+    Single<TvSeason> season(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Query("append_to_response") AppendToResponse appendToResponse
@@ -102,7 +102,7 @@ public interface TvSeasonsService {
      * @param options            <em>Optional.</em> parameters for the appended extra results.
      */
     @GET("tv/{tv_id}/season/{season_number}")
-    Call<TvSeason> season(
+    Single<TvSeason> season(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Query("append_to_response") AppendToResponse appendToResponse,
@@ -120,7 +120,7 @@ public interface TvSeasonsService {
      * @param tvShowSeasonNumber TvSeason Number.
      */
     @GET("tv/{tv_id}/season/{season_number}/account_states")
-    Call<AccountStatesResults> accountStates(
+    Single<AccountStatesResults> accountStates(
             @Path("tv_id") int tmdbId,
             @Path("season_number") int tvShowSeasonNumber
     );
@@ -138,7 +138,7 @@ public interface TvSeasonsService {
      * @param page           <em>Optional.</em> Minimum value is 1, expected value is an integer.
      */
     @GET("tv/season/{season_id}/changes")
-    Call<Changes> changes(
+    Single<Changes> changes(
             @Path("season_id") int tvShowSeasonId,
             @Query("start_date") TmdbDate start_date,
             @Query("end_date") TmdbDate end_date,
@@ -152,7 +152,7 @@ public interface TvSeasonsService {
      * @param tvShowSeasonNumber TvSeason Number.
      */
     @GET("tv/{tv_id}/season/{season_number}/credits")
-    Call<Credits> credits(
+    Single<Credits> credits(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber
     );
@@ -165,7 +165,7 @@ public interface TvSeasonsService {
      * @param language           <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/{tv_id}/season/{season_number}/external_ids")
-    Call<TvSeasonExternalIds> externalIds(
+    Single<TvSeasonExternalIds> externalIds(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Query("language") String language
@@ -179,7 +179,7 @@ public interface TvSeasonsService {
      * @param language           <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/{tv_id}/season/{season_number}/images")
-    Call<Images> images(
+    Single<Images> images(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Query("language") String language
@@ -193,7 +193,7 @@ public interface TvSeasonsService {
      * @param language           <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/{tv_id}/season/{season_number}/videos")
-    Call<Videos> videos(
+    Single<Videos> videos(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Query("language") String language

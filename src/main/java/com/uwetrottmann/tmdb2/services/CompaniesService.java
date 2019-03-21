@@ -6,7 +6,7 @@ import com.uwetrottmann.tmdb2.entities.DiscoverFilter;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -21,7 +21,7 @@ public interface CompaniesService {
      * @param companyId A Company TMDb id.
      */
     @GET("company/{company_id}")
-    Call<Company> summary(
+    Single<Company> summary(
             @Path("company_id") int companyId
     );
 
@@ -32,7 +32,7 @@ public interface CompaniesService {
      * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b> movies
      */
     @GET("company/{company_id}")
-    Call<Company> summary(
+    Single<Company> summary(
             @Path("company_id") int companyId,
             @Query("append_to_response") AppendToResponse appendToResponse
     );
@@ -45,7 +45,7 @@ public interface CompaniesService {
      * @param options          <em>Optional.</em> parameters for the appended extra results.
      */
     @GET("company/{company_id}")
-    Call<Company> summary(
+    Single<Company> summary(
             @Path("company_id") int companyId,
             @Query("append_to_response") AppendToResponse appendToResponse,
             @QueryMap Map<String, String> options
@@ -65,7 +65,7 @@ public interface CompaniesService {
      * @param companyId A Company TMDb id.
      */
     @GET("company/{company_id}/movies")
-    Call<MovieResultsPage> movies(
+    Single<MovieResultsPage> movies(
             @Path("company_id") int companyId
     );
 }
