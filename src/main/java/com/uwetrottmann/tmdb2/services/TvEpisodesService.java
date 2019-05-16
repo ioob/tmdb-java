@@ -9,10 +9,10 @@ import com.uwetrottmann.tmdb2.entities.RatingObject;
 import com.uwetrottmann.tmdb2.entities.Status;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.TvEpisode;
-import com.uwetrottmann.tmdb2.entities.TvExternalIds;
+import com.uwetrottmann.tmdb2.entities.TvEpisodeExternalIds;
 import com.uwetrottmann.tmdb2.entities.Videos;
-import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
 import io.reactivex.Single;
+import java.util.Map;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -21,23 +21,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
-import java.util.Map;
-
 public interface TvEpisodesService {
-
-    /**
-     * Get the primary information about a TV episode by combination of a season and episode number.
-     *
-     * @param tvShowId            A Tv Show TMDb id.
-     * @param tvShowSeasonNumber  TvSeason Number.
-     * @param tvShowEpisodeNumber TvEpisode Number.
-     */
-    @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}")
-    Single<TvEpisode> episode(
-            @Path("tv_id") int tvShowId,
-            @Path("season_number") int tvShowSeasonNumber,
-            @Path("episode_number") int tvShowEpisodeNumber
-    );
 
     /**
      * Get the primary information about a TV episode by combination of a season and episode number.
@@ -61,22 +45,6 @@ public interface TvEpisodesService {
      * @param tvShowId            A Tv Show TMDb id.
      * @param tvShowSeasonNumber  TvSeason Number.
      * @param tvShowEpisodeNumber TvEpisode Number.
-     * @param appendToResponse    <em>Optional.</em> extra requests to append to the result.
-     */
-    @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}")
-    Single<TvEpisode> episode(
-            @Path("tv_id") int tvShowId,
-            @Path("season_number") int tvShowSeasonNumber,
-            @Path("episode_number") int tvShowEpisodeNumber,
-            @Query("append_to_response") AppendToResponse appendToResponse
-    );
-
-    /**
-     * Get the primary information about a TV episode by combination of a season and episode number.
-     *
-     * @param tvShowId            A Tv Show TMDb id.
-     * @param tvShowSeasonNumber  TvSeason Number.
-     * @param tvShowEpisodeNumber TvEpisode Number.
      * @param language            <em>Optional.</em> ISO 639-1 code.
      * @param appendToResponse    <em>Optional.</em> extra requests to append to the result.
      */
@@ -87,24 +55,6 @@ public interface TvEpisodesService {
             @Path("episode_number") int tvShowEpisodeNumber,
             @Query("language") String language,
             @Query("append_to_response") AppendToResponse appendToResponse
-    );
-
-    /**
-     * Get the primary information about a TV episode by combination of a season and episode number.
-     *
-     * @param tvShowId            A Tv Show TMDb id.
-     * @param tvShowSeasonNumber  TvSeason Number.
-     * @param tvShowEpisodeNumber TvEpisode Number.
-     * @param appendToResponse    <em>Optional.</em> extra requests to append to the result.
-     * @param options             <em>Optional.</em> parameters for the appended extra results.
-     */
-    @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}")
-    Single<TvEpisode> episode(
-            @Path("tv_id") int tvShowId,
-            @Path("season_number") int tvShowSeasonNumber,
-            @Path("episode_number") int tvShowEpisodeNumber,
-            @Query("append_to_response") AppendToResponse appendToResponse,
-            @QueryMap Map<String, String> options
     );
 
     /**
@@ -167,7 +117,7 @@ public interface TvEpisodesService {
      * @param tvShowEpisodeNumber TvEpisode Number.
      */
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}/external_ids")
-    Single<TvExternalIds> externalIds(
+    Single<TvEpisodeExternalIds> externalIds(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber
@@ -238,44 +188,6 @@ public interface TvEpisodesService {
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber,
             @Body RatingObject body
-    );
-
-    /**
-     * Rate a TV show.
-     *
-     * <b>Requires an active Session.</b>
-     *
-     * @param tvShowId            TMDb id.
-     * @param tvShowSeasonNumber  TvSeason Number.
-     * @param tvShowEpisodeNumber TvEpisode Number.
-     * @param authenticationType  Authentication Type for this operation. Available Choices: Account, Guest.
-     * @param body                <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
-     */
-    @POST("tv/{tv_id}/season/{season_number}/episode/{episode_number}/rating")
-    Single<Status> addRating(
-            @Path("tv_id") int tvShowId,
-            @Path("season_number") int tvShowSeasonNumber,
-            @Path("episode_number") int tvShowEpisodeNumber,
-            @Query("authentication") AuthenticationType authenticationType,
-            @Body RatingObject body
-    );
-
-    /**
-     * Remove your rating for a TV show.
-     *
-     * <b>Requires an active Session.</b>
-     *
-     * @param tvShowId            TMDb id.
-     * @param tvShowSeasonNumber  TvSeason Number.
-     * @param tvShowEpisodeNumber TvEpisode Number.
-     * @param authenticationType  Authentication Type for this operation. Available Choices: Account, Guest.
-     */
-    @DELETE("tv/{tv_id}/season/{season_number}/episode/{episode_number}/rating")
-    Single<Status> deleteRating(
-            @Path("tv_id") int tvShowId,
-            @Path("season_number") int tvShowSeasonNumber,
-            @Path("episode_number") int tvShowEpisodeNumber,
-            @Query("authentication") AuthenticationType authenticationType
     );
 
     /**

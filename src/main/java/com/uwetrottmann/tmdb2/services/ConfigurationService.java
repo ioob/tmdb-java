@@ -1,7 +1,9 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.Configuration;
+import com.uwetrottmann.tmdb2.entities.Jobs;
 import io.reactivex.Single;
+import java.util.List;
 import retrofit2.http.GET;
 
 public interface ConfigurationService {
@@ -18,5 +20,13 @@ public interface ConfigurationService {
      */
     @GET("configuration")
     Single<Configuration> configuration();
+
+    /**
+     * Get a list of the jobs and departments we use on TMDb.
+     *
+     * https://developers.themoviedb.org/3/configuration/get-jobs-1
+     */
+    @GET("configuration/jobs")
+    Single<List<Jobs>> jobs();
 
 }

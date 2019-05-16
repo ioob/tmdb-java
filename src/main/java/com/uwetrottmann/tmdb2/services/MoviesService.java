@@ -9,6 +9,7 @@ import com.uwetrottmann.tmdb2.entities.Images;
 import com.uwetrottmann.tmdb2.entities.Keywords;
 import com.uwetrottmann.tmdb2.entities.ListResultsPage;
 import com.uwetrottmann.tmdb2.entities.Movie;
+import com.uwetrottmann.tmdb2.entities.MovieExternalIds;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.RatingObject;
 import com.uwetrottmann.tmdb2.entities.ReleaseDate;
@@ -18,8 +19,8 @@ import com.uwetrottmann.tmdb2.entities.Status;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.Videos;
-import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
 import io.reactivex.Single;
+import java.util.Map;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -27,8 +28,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
-
-import java.util.Map;
 
 public interface MoviesService {
 
@@ -47,36 +46,14 @@ public interface MoviesService {
     /**
      * Get the basic movie information for a specific movie id.
      *
-     * @param movieId A Movie TMDb id.
-     */
-    @GET("movie/{movie_id}")
-    Single<Movie> summary(
-            @Path("movie_id") int movieId
-    );
-
-    /**
-     * Get the basic movie information for a specific movie id.
-     *
      * @param movieId          A Movie TMDb id.
      * @param language         <em>Optional.</em> ISO 639-1 code.
-     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Values:</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
+     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
      */
     @GET("movie/{movie_id}")
     Single<Movie> summary(
             @Path("movie_id") int movieId,
             @Query("language") String language,
-            @Query("append_to_response") AppendToResponse appendToResponse
-    );
-
-    /**
-     * Get the basic movie information for a specific movie id.
-     *
-     * @param movieId          A Movie TMDb id.
-     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Values:</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
-     */
-    @GET("movie/{movie_id}")
-    Single<Movie> summary(
-            @Path("movie_id") int movieId,
             @Query("append_to_response") AppendToResponse appendToResponse
     );
 
@@ -92,20 +69,6 @@ public interface MoviesService {
     Single<Movie> summary(
             @Path("movie_id") int movieId,
             @Query("language") String language,
-            @Query("append_to_response") AppendToResponse appendToResponse,
-            @QueryMap Map<String, String> options
-    );
-
-    /**
-     * Get the basic movie information for a specific movie id.
-     *
-     * @param movieId          A Movie TMDb id.
-     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
-     * @param options          <em>Optional.</em> parameters for the appended extra results.
-     */
-    @GET("movie/{movie_id}")
-    Single<Movie> summary(
-            @Path("movie_id") int movieId,
             @Query("append_to_response") AppendToResponse appendToResponse,
             @QueryMap Map<String, String> options
     );
@@ -164,6 +127,18 @@ public interface MoviesService {
     @GET("movie/{movie_id}/credits")
     Single<Credits> credits(
             @Path("movie_id") int movieId
+    );
+
+    /**
+     * Get the external ids that we have stored for a movie.
+     *
+     * @param movieId A Movie TMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/{movie_id}/external_ids")
+    Single<MovieExternalIds> externalIds(
+            @Path("movie_id") int movieId,
+            @Query("language") String language
     );
 
     /**
@@ -343,22 +318,6 @@ public interface MoviesService {
      *
      * <b>Requires an active Session.</b>
      *
-     * @param movieId            A Movie TMDb id.
-     * @param authenticationType Authentication Type for this operation. Available Choices: Account, Guest.
-     * @param body               <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
-     */
-    @POST("movie/{movie_id}/rating")
-    Single<Status> addRating(
-            @Path("movie_id") Integer movieId,
-            @Query("authentication") AuthenticationType authenticationType,
-            @Body RatingObject body
-    );
-
-    /**
-     * Sets the Rating for the movie with the specified id.
-     *
-     * <b>Requires an active Session.</b>
-     *
      * @param movieId A Movie TMDb id.
      * @param body    <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
      */
@@ -366,20 +325,6 @@ public interface MoviesService {
     Single<Status> addRating(
             @Path("movie_id") Integer movieId,
             @Body RatingObject body
-    );
-
-    /**
-     * Deletes the Rating for the movie with the specified id.
-     *
-     * <b>Requires an active Session.</b>
-     *
-     * @param movieId            A Movie TMDb id.
-     * @param authenticationType Authentication Type for this operation. Available Choices: Account, Guest.
-     */
-    @DELETE("movie/{movie_id}/rating")
-    Single<Status> deleteRating(
-            @Path("movie_id") Integer movieId,
-            @Query("authentication") AuthenticationType authenticationType
     );
 
     /**

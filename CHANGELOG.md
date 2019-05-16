@@ -1,6 +1,79 @@
 Change Log
 ==========
 
+## 2.0.3
+_2019-04-12_
+
+* Add `name` property to `Translation`, used for TV shows instead of `title`. Thanks @myron0815!
+
+## 2.0.2
+_2019-03-14_
+
+* Add country code and translation data (title, overview, website) to `Translation`. Thanks @myron0815!
+
+## 2.0.1
+_2019-02-08_
+
+* Do not use `ThreadLocal.withInitial` from Java 8, it's not available on Android.
+
+## 2.0.0
+_2019-02-07_
+
+* Update `retrofit` dependency to `2.5.0`. The previous versions are affected by a path-traversal security vulnerability. 
+  https://github.com/square/retrofit/blob/master/CHANGELOG.md
+* Produce Java 8 bytecode. For Android this requires Android Gradle Plugin 3.2.x or newer.
+* Fix crash due to missing `character` property for cast credits. Thanks @JeremyQuagmire!
+  https://github.com/UweTrottmann/tmdb-java/pull/69
+* For the `com.uwetrottmann.tmdb2` package return values and fields are now non-null unless otherwise annotated. For 
+  the `com.uwetrottmann.tmdb2.entities` package return values and fields are now annotated nullable.
+  https://github.com/UweTrottmann/tmdb-java/pull/70
+* Simplified session handling: instead of passing an `AuthenticationType` the library will use an available account
+  session, or if not available a guest session. Also `Tmdb` methods regarding sessions have changed. 
+  See https://github.com/UweTrottmann/tmdb-java/pull/71 for details.
+
+## 1.10.1
+_2018-09-21_
+
+* Do not leak the response body if TMDB asks to retry the request.
+* Add `last_episode_to_air` and `next_episode_to_air` to `TvShow`. Thanks @serafo27!
+
+## 1.10.0
+_2018-09-12_
+
+* Clean up some methods, notably those without language param.
+* Add language parameter to People summary methods, thanks @JeremyQuagmire!
+
+## 1.9.0
+_2018-08-08_
+
+* Support getting external IDs for movies. Thanks @JeremyQuagmire!
+* Drop `BaseExternalIds`. Properties have moved to their respective subclasses. Added `TvEpisodeExternalIds`.
+* Add new social media IDs to external IDs.
+* Update `retrofit` dependency to `2.4.0`.
+
+## 1.8.4
+_2018-04-25_
+
+* Add `BaseTvSeason.episode_count` which is included in a show summary. Thanks @stavangr!
+* Allow lists to include shows: `List.items` type changed to `Media` from `BaseMovie`. Thanks @stavangr!
+
+## 1.8.3
+_2018-02-22_
+
+* Do not crash if response is unsuccessful and error code is not handled.
+* Undo throwing on unsuccessful responses with known error codes. To analyze why a response is unsuccessful 
+  use `Tmdb.throwOnKnownError(response)` instead.
+
+## 1.8.2
+_2018-02-02_
+
+* Undo rename of TvService to TvShowService.
+* Removed TmdbInvalidAcceptHeaderException: managed by retrofit. Thanks @ProIcons!
+* Move jobs endpoint into `ConfigurationService`, returns list of `Jobs`.
+* Find results should return base media classes. #49 Thanks @ProIcons!
+* Add missing fields to TaggedImage entity. #51 Thanks @ProIcons!
+* Video type is now an enum (was a String). #52 Thanks @ProIcons!
+
 ## 1.8.1
 _2017-08-02_
 * Fix: If multiple responses containing a date are processed at the same time date formatting fails with exceptions. Thanks @chrisbanes!

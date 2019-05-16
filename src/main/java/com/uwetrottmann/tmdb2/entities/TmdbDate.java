@@ -9,6 +9,7 @@ import java.util.Date;
 
 public class TmdbDate {
 
+    // can not use ThreadLocal.withInitial as it requires Java 8
     private static final ThreadLocal<DateFormat> TMDB_DATE_FORMAT = new ThreadLocal<DateFormat>() {
         @Override
         public DateFormat initialValue() {

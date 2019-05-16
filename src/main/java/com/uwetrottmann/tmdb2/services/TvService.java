@@ -16,8 +16,8 @@ import com.uwetrottmann.tmdb2.entities.TvExternalIds;
 import com.uwetrottmann.tmdb2.entities.TvShow;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.entities.Videos;
-import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
 import io.reactivex.Single;
+import java.util.Map;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -26,19 +26,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
-import java.util.Map;
-
-public interface TvShowService {
-
-    /**
-     * Get the primary information about a TV series by id.
-     *
-     * @param tvShowId A Tv Show TMDb id.
-     */
-    @GET("tv/{tv_id}")
-    Single<TvShow> tv(
-            @Path("tv_id") int tvShowId
-    );
+public interface TvService {
 
     /**
      * Get the primary information about a TV series by id.
@@ -78,32 +66,6 @@ public interface TvShowService {
     Single<TvShow> tv(
             @Path("tv_id") int tvShowId,
             @Query("language") String language,
-            @Query("append_to_response") AppendToResponse appendToResponse,
-            @QueryMap Map<String, String> options
-    );
-
-    /**
-     * Get the primary information about a TV series by id.
-     *
-     * @param tvShowId         A Tv Show TMDb id.
-     * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
-     */
-    @GET("tv/{tv_id}")
-    Single<TvShow> tv(
-            @Path("tv_id") int tvShowId,
-            @Query("append_to_response") AppendToResponse appendToResponse
-    );
-
-    /**
-     * Get the primary information about a TV series by id.
-     *
-     * @param tvShowId         A Tv Show TMDb id.
-     * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
-     * @param options          <em>Optional.</em> parameters for the appended extra results.
-     */
-    @GET("tv/{tv_id}")
-    Single<TvShow> tv(
-            @Path("tv_id") int tvShowId,
             @Query("append_to_response") AppendToResponse appendToResponse,
             @QueryMap Map<String, String> options
     );
@@ -328,22 +290,6 @@ public interface TvShowService {
      *
      * <b>Requires an active Session.</b>
      *
-     * @param tvShowId           TMDb id.
-     * @param authenticationType Authentication Type for this operation. Available Choices: Account, Guest.
-     * @param body               <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
-     */
-    @POST("tv/{tv_id}/rating")
-    Single<Status> addRating(
-            @Path("tv_id") Integer tvShowId,
-            @Query("authentication") AuthenticationType authenticationType,
-            @Body RatingObject body
-    );
-
-    /**
-     * Rate a TV show.
-     *
-     * <b>Requires an active Session.</b>
-     *
      * @param tvShowId TMDb id.
      * @param body     <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
      */
@@ -351,20 +297,6 @@ public interface TvShowService {
     Single<Status> addRating(
             @Path("tv_id") Integer tvShowId,
             @Body RatingObject body
-    );
-
-    /**
-     * Remove your rating for a TV show.
-     *
-     * <b>Requires an active Session.</b>
-     *
-     * @param tvShowId           TMDb id.
-     * @param authenticationType Authentication Type for this operation. Available Choices: Account, Guest.
-     */
-    @DELETE("tv/{tv_id}/rating")
-    Single<Status> deleteRating(
-            @Path("tv_id") Integer tvShowId,
-            @Query("authentication") AuthenticationType authenticationType
     );
 
     /**
